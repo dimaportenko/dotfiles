@@ -1,0 +1,51 @@
+import:
+  # uncomment the flavour you want below:
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+#  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+
+colors:
+    primary:
+        foreground: "#7F849C" # text
+
+# Font configs
+font:
+  size: 16.0
+
+  normal:
+    family: JetBrainsMono Nerd Font
+    # style: Regular
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+
+
+# window
+window:
+  opacity: 0.95
+  dynamic_title: true
+
+  decorations: buttonless
+
+  position:
+    x: 0
+    y: 0
+
+  # padding:
+  #   x: 10
+  #   y: 10
+
+  startup_mode: Maximized
+
+  dynamic_padding: false
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+  # Scrolling distance multiplier.
+  multiplier: 3
