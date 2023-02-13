@@ -33,12 +33,31 @@ function _COPY_CWD()
   _COPY_TO_CLIPBOARD(path)
 end
 
+function _XCODE_BUILD_CLEAN()
+  local xcodeproj = vim.fn.glob("ios/*.xcodeproj")
+  local xcworkspace = vim.fn.glob("ios/*.xcworkspace")
+
+  -- print(vim.inspect(xcodeproj))
+  -- print(vim.inspect(xcworkspace))
+
+  -- if #xcworkspace > 0 then
+  --   vim.api.nvim_command("!xcodebuild clean -workspace " .. xcworkspace)
+  -- else
+  if #xcodeproj > 0 then
+    vim.api.nvim_command("!xcodebuild clean -project " .. xcodeproj)
+  else
+    vim.api.nvim_err_write("No Xcode project or workspace found in the `ios` directory.")
+  end
+end
+
 cmd("CopyBufferFilepath", "lua _COPY_BUFFER_FILEPATH()", {})
 cmd("CopyCurrentWorkingDir", "lua _COPY_CWD()", {})
 
 cmd("OpenBufferInFinder", "lua _OPEN_BUFFER_IN_FINDER()", {})
 
 cmd("XcodeOpenRN", "!xed ios", {})
+cmd("XcodeCleanIOSBuildRN", "lua _XCODE_BUILD_CLEAN()", {})
+
 cmd("AndroidStudioRN", "!open android/ -a Android\\ Studio", {})
 -- for Android metro bundler connect
 -- adb reverse tcp: 8081 tcp:8081

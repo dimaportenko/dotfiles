@@ -99,6 +99,9 @@ return packer.startup(function(use)
                     dismiss = "<C-]>",
                   },
                 },
+                filetypes = {
+                  markdown = true,
+                }
               }
             )
           end, 100)
@@ -146,6 +149,9 @@ return packer.startup(function(use)
 
   -- Run package json scripts
   use "~/work/nvim/plugins/telescope-js-package-scripts.nvim"
+
+  -- use "~/work/nvim/plugins/telescope-simulators.nvim"
+  use "dimaportenko/telescope-simulators.nvim"
 
   -- Treesitter
   use {

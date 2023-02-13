@@ -78,6 +78,7 @@ keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>;", "<cmd>Telescope toggleterm<cr>", opts)
 keymap("n", "<leader>co", "<cmd>Telescope commands<cr>", opts)
+keymap("n", "<leader>[", "<cmd>Telescope resume<cr>", opts)
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)

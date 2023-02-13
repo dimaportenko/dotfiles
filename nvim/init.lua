@@ -19,4 +19,4 @@ require "dimaportenko.globals"
 require "dimaportenko.rntools"
 require "dimaportenko.custom"
 require "dimaportenko.gitblame"
-
+require "dimaportenko.simulators"
