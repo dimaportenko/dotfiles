@@ -1,9 +1,28 @@
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
-  return
-end
+require("mason").setup()
 
-require("dimaportenko.lsp.lsp-installer")
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+local servers = {
+  lua_ls = require("dimaportenko.lsp.settings.lua_ls").settings,
+  rust_analyzer = {},
+}
+
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
 require("dimaportenko.lsp.handlers").setup()
-require("dimaportenko.lsp.null-ls")
+local on_attach = require("dimaportenko.lsp.handlers").on_attach
+local capabilities = require("dimaportenko.lsp.handlers").capabilities
 
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
+require("dimaportenko.lsp.null-ls")

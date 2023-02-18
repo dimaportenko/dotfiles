@@ -38,6 +38,9 @@ packer.init {
   },
 }
 
+-- Copilot config
+local copilot_config = require("dimaportenko/copilot").config;
+
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
@@ -68,6 +71,7 @@ return packer.startup(function(use)
   -- cmp plugins
   use {
     "hrsh7th/nvim-cmp",
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
     requires = {
       -- copilot
       {
@@ -75,35 +79,7 @@ return packer.startup(function(use)
         event = { "VimEnter" },
         config = function()
           vim.defer_fn(function()
-            require("copilot").setup(
-              {
-                panel = {
-                  enabled = true,
-                  auto_refresh = false,
-                  keymap = {
-                    jump_prev = "[[",
-                    jump_next = "]]",
-                    accept = "<CR>",
-                    refresh = "gr",
-                    -- open = "<M-l>"
-                  },
-                },
-                suggestion = {
-                  enabled = true,
-                  auto_trigger = true,
-                  debounce = 75,
-                  keymap = {
-                    accept = "<M-CR>",
-                    next = "<M-Tab>",
-                    prev = "<M-S-Tab>",
-                    dismiss = "<C-]>",
-                  },
-                },
-                filetypes = {
-                  markdown = true,
-                }
-              }
-            )
+            require("copilot").setup(copilot_config)
           end, 100)
         end,
       },
@@ -139,8 +115,19 @@ return packer.startup(function(use)
   }
 
   -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+
+      -- Useful status updates for LSP
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim',  
+  }
+
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "MunifTanjim/prettier.nvim" -- prettier
 
