@@ -3,7 +3,13 @@ if not status then
   return
 end
 
-null_ls.setup()
+null_ls.setup({
+  debug = true,
+  sources = {
+    require("null-ls").builtins.formatting.eslint
+  }
+})
+
 -- require("null-ls").setup({
 --   debug = true,
 --     sources = {

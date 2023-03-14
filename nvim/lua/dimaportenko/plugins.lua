@@ -61,8 +61,12 @@ return packer.startup(function(use)
   use { 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } }
 
   -- Plugins can have post-install/update hooks
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  })
 
   -- colorscheme
   -- use 'folke/tokyonight.nvim'
@@ -120,12 +124,12 @@ return packer.startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
 
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+    -- Useful status updates for LSP
+    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',  
+    -- Additional lua configuration, makes nvim stuff amazing!
+    'folke/neodev.nvim',
   }
 
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
@@ -180,6 +184,10 @@ return packer.startup(function(use)
 
   -- debugging
   use 'mfussenegger/nvim-dap'
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+
+  -- rust tools
+  use 'simrat39/rust-tools.nvim'
 
   -- Local plugins
   -- use "~/work/nvim/plugins/stackmap.nvim"

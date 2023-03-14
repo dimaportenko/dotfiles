@@ -1,7 +1,9 @@
 -- require("rntools").setup()
 
 local Terminal = require('toggleterm.terminal').Terminal
+local opts = {noremap = true, silent = true}
 
+-- React Native start --
 local config = {
   cmd = "yarn start",
   hidden = true,
@@ -19,8 +21,6 @@ local config = {
   end,
 }
 
-local opts = {noremap = true, silent = true}
-
 local rnstart = Terminal:new(config)
 
 function _RNSTART_TOGGLE()
@@ -28,21 +28,18 @@ function _RNSTART_TOGGLE()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>lua _RNSTART_TOGGLE()<CR>", opts)
+-- End React Native start --
 
+-- Package scripts --
 local telescope = require('telescope')
 function _PACKAGE_SCRIPTS()
   telescope.extensions.packagescript.scripts()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>p", "<cmd>lua _PACKAGE_SCRIPTS()<CR>", opts)
--- 
+-- End Package scripts --
 
-local node = Terminal:new(config)
-function _NODE_TOGGLE_TEST()
-	node:toggle()
-end
-
-
+-- Lazygit
 local lazygit = Terminal:new({
   cmd = "lazygit",
   hidden = true,
@@ -54,4 +51,4 @@ function _LAZYGIT()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _LAZYGIT()<CR>", opts)
-
+-- End Lazygit

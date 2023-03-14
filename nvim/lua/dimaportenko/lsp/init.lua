@@ -4,8 +4,9 @@ require("mason").setup()
 local mason_lspconfig = require 'mason-lspconfig'
 
 local servers = {
-  lua_ls = require("dimaportenko.lsp.settings.lua_ls").settings,
-  rust_analyzer = {},
+  lua_ls = require "dimaportenko.lsp.settings.lua_ls".settings,
+  rust_analyzer = require "dimaportenko.lsp.settings.rust_analyzer".settings,
+  clangd = require "dimaportenko.lsp.settings.clangd".settings,
 }
 
 mason_lspconfig.setup {

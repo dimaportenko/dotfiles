@@ -18,6 +18,8 @@ function _COPY_BUFFER_FILEPATH()
   local path = vim.api.nvim_buf_get_name(0)
   -- copy to clipboard
   _COPY_TO_CLIPBOARD(path)
+
+  print(path)
 end
 
 -- copy current buffer filepath
@@ -35,7 +37,7 @@ end
 
 function _XCODE_BUILD_CLEAN()
   local xcodeproj = vim.fn.glob("ios/*.xcodeproj")
-  local xcworkspace = vim.fn.glob("ios/*.xcworkspace")
+  -- local xcworkspace = vim.fn.glob("ios/*.xcworkspace")
 
   -- print(vim.inspect(xcodeproj))
   -- print(vim.inspect(xcworkspace))
@@ -70,7 +72,11 @@ cmd("KillReactNativeBundler", "!lsof -i:8081 -t | xargs kill -9", {})
 -- live_grep for selected node in nvim-tree
 -- https://github.com/alexander-born/.cfg/blob/aa6475fd2b696ea07209e68a6db068cacff8e205/nvim/.config/nvim/lua/config/nvimtree.lua#L23
 function _LIVE_GREP_AT_NVIM_TREE_NODE()
-  local node = require('nvim-tree.lib').get_node_at_cursor()
+  -- node pcall
+  local ok, node = pcall(require('nvim-tree.lib').get_node_at_cursor)
+  -- local node = require('nvim-tree.lib').get_node_at_cursor()
+  if not ok then return end
+
   if not node then return end
   require('telescope.builtin').live_grep({ search_dirs = { node.absolute_path } })
 end
@@ -92,3 +98,6 @@ cmd("OpenNvimTreeNodeInFinder", "lua _OPEN_NVIM_TREE_NODE_IN_FINDER()", {})
 
 -- ios simulator list
 -- xcrun simctl list
+
+-- close all buffers
+cmd("CloseAllBuffers", "bufdo bwipeout", {})

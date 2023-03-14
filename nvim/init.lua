@@ -20,3 +20,6 @@ require "dimaportenko.rntools"
 require "dimaportenko.custom"
 require "dimaportenko.gitblame"
 require "dimaportenko.simulators"
+require "dimaportenko.dap"
+
+require "dimaportenko.rust-tools"

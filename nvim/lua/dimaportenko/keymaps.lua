@@ -71,14 +71,19 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Telescope
-keymap("n", "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", opts)
+-- keymap("n", "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
+-- keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
 -- keymap("n", "<leader>t", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>;", "<cmd>Telescope toggleterm<cr>", opts)
 keymap("n", "<leader>co", "<cmd>Telescope commands<cr>", opts)
 keymap("n", "<leader>[", "<cmd>Telescope resume<cr>", opts)
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
@@ -87,6 +92,8 @@ keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 -- keymap("n", "<M-p>", ":Prettier<cr>", opts)
 keymap("n", "<M-l>", ":Prettier<cr>", opts)
 keymap("n", "<leader>l", ":Prettier<cr>", opts)
+keymap("n", "<leader>cf", ":Format<cr>", opts)
+
 -- keymap("i", "<M-l>", "<ESC>:Prettier<cr>", opts)
 
 -- PlenaryTestFile
@@ -97,4 +104,3 @@ keymap("n", "<leader>w", ":Bdelete<cr>", opts)
 
 -- Close quick fix
 keymap("n", "<leader>cl", ":ccl<cr>", opts)
-
