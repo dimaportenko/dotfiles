@@ -1,6 +1,7 @@
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 local cmd = vim.api.nvim_create_user_command
+local api = vim.api
 
 local opts = { noremap = true, silent = true }
 
@@ -101,3 +102,16 @@ cmd("OpenNvimTreeNodeInFinder", "lua _OPEN_NVIM_TREE_NODE_IN_FINDER()", {})
 
 -- close all buffers
 cmd("CloseAllBuffers", "bufdo bwipeout", {})
+
+
+-- close current focused term
+function _TOGGLE_FOCUSED_TERM()
+  local toggleterm = require('toggleterm')
+  local name = api.nvim_buf_get_name(api.nvim_get_current_buf())
+  local parts = vim.split(name, "#", {})
+  local id = tonumber(parts[#parts])
+  toggleterm.toggle(id)
+end
+
+cmd("ToggleFocusedTerm", "lua _TOGGLE_FOCUSED_TERM()", {})
+keymap("n", "<leader>ct", "<cmd>lua _TOGGLE_FOCUSED_TERM()<cr>", opts)
