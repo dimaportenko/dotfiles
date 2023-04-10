@@ -91,8 +91,8 @@ keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 -- Prettier
 -- keymap("n", "<M-p>", ":Prettier<cr>", opts)
 keymap("n", "<M-l>", ":Prettier<cr>", opts)
-keymap("n", "<leader>l", ":Prettier<cr>", opts)
-keymap("n", "<leader>cf", ":Format<cr>", opts)
+-- keymap("n", "<leader>l", ":Prettier<cr>", opts)
+-- keymap("n", "<leader>cf", ":Format<cr>", opts)
 
 -- keymap("i", "<M-l>", "<ESC>:Prettier<cr>", opts)
 
@@ -104,3 +104,45 @@ keymap("n", "<leader>w", ":Bdelete<cr>", opts)
 
 -- Close quick fix
 keymap("n", "<leader>cl", ":ccl<cr>", opts)
+
+-- format based on the file type
+local function is_filetype_in_list(file_type, filetypes)
+  for _, ft in ipairs(filetypes) do
+    if ft == file_type then
+      return true
+    end
+  end
+  return false
+end
+
+function _RUN_FORMAT_BY_FILETYPE()
+  local file_type = vim.bo.filetype
+
+  -- print("file_type - ", file_type)
+  local filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  }
+
+  if is_filetype_in_list(file_type, filetypes) then -- Add keymaps for Prettier files
+    -- run :Prettier cmd
+    print("Prettier")
+    vim.cmd("Prettier")
+  else -- Add keymaps for other files
+    print("Format")
+    vim.cmd("Format")
+  end
+end
+
+vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua _RUN_FORMAT_BY_FILETYPE()<CR>", opts)
+

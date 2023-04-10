@@ -15,11 +15,11 @@ autocmd('TextYankPost', {
 
 -- remove comment on new line
 autocmd("BufEnter", {
-    pattern = "*",
-    command = "set fo-=c fo-=r fo-=o",
+  pattern = "*",
+  command = "set fo-=c fo-=r fo-=o",
 })
 
--- set ruby filetype 
+-- set ruby filetype
 autocmd(
   { "BufRead", "BufNewFile" },
   {
