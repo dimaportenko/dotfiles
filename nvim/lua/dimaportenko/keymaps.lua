@@ -88,14 +88,6 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 
--- Prettier
--- keymap("n", "<M-p>", ":Prettier<cr>", opts)
-keymap("n", "<M-l>", ":Prettier<cr>", opts)
--- keymap("n", "<leader>l", ":Prettier<cr>", opts)
--- keymap("n", "<leader>cf", ":Format<cr>", opts)
-
--- keymap("i", "<M-l>", "<ESC>:Prettier<cr>", opts)
-
 -- PlenaryTestFile
 -- keymap('n', '<leader>t', '<Plug>PlenaryTestFile', opts)
 
@@ -105,7 +97,20 @@ keymap("n", "<leader>w", ":Bdelete<cr>", opts)
 -- Close quick fix
 keymap("n", "<leader>cl", ":ccl<cr>", opts)
 
--- format based on the file type
+-- Prettier
+-- keymap("n", "<M-p>", ":Prettier<cr>", opts)
+keymap("n", "<M-l>", ":Prettier<cr>", opts)
+-- keymap("n", "<leader>l", ":Prettier<cr>", opts)
+-- keymap("n", "<leader>cf", ":Format<cr>", opts)
+
+-- switch case 
+vim.api.nvim_set_keymap(
+  'n', '<Leader>sc', '<cmd>lua require("dimaportenko.micro_plugins.switch_case").switch_case()<CR>',
+  { noremap = true, silent = true }
+)
+
+
+-- Format based on the file type
 local function is_filetype_in_list(file_type, filetypes)
   for _, ft in ipairs(filetypes) do
     if ft == file_type then
@@ -135,11 +140,8 @@ function _RUN_FORMAT_BY_FILETYPE()
   }
 
   if is_filetype_in_list(file_type, filetypes) then -- Add keymaps for Prettier files
-    -- run :Prettier cmd
-    print("Prettier")
     vim.cmd("Prettier")
   else -- Add keymaps for other files
-    print("Format")
     vim.cmd("Format")
   end
 end
