@@ -103,6 +103,8 @@ keymap("n", "<M-l>", ":Prettier<cr>", opts)
 -- keymap("n", "<leader>l", ":Prettier<cr>", opts)
 -- keymap("n", "<leader>cf", ":Format<cr>", opts)
 
+keymap("n", "<leader>p", ":Telescope project_cli_commands open<cr>", opts)
+
 -- switch case 
 vim.api.nvim_set_keymap(
   'n', '<Leader>sc', '<cmd>lua require("dimaportenko.micro_plugins.switch_case").switch_case()<CR>',

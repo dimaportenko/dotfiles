@@ -36,7 +36,7 @@ function _PACKAGE_SCRIPTS()
   telescope.extensions.packagescript.scripts()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>p", "<cmd>lua _PACKAGE_SCRIPTS()<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>p", "<cmd>lua _PACKAGE_SCRIPTS()<CR>", opts)
 -- End Package scripts --
 
 -- Lazygit

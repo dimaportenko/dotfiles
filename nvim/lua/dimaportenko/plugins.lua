@@ -144,6 +144,8 @@ return packer.startup(function(use)
   -- use "~/work/nvim/plugins/telescope-simulators.nvim"
   use "dimaportenko/telescope-simulators.nvim"
 
+  use "~/work/nvim/plugins/project-cli-commands.nvim"
+
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
