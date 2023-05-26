@@ -1,5 +1,7 @@
 require("mason").setup()
 
+require 'lspconfig'.sourcekit.setup {}
+
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
@@ -7,6 +9,9 @@ local servers = {
   lua_ls = require "dimaportenko.lsp.settings.lua_ls".settings,
   rust_analyzer = require "dimaportenko.lsp.settings.rust_analyzer".settings,
   clangd = require "dimaportenko.lsp.settings.clangd".settings,
+  -- sourcekit = require "dimaportenko.lsp.settings.sourcekit".settings,
+  -- ["sourcekit-lsp"] = require "dimaportenko.lsp.settings.sourcekit".settings,
+
 }
 
 mason_lspconfig.setup {
