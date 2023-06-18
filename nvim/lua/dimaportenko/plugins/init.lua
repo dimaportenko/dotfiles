@@ -1,25 +1,7 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- map leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Copilot config
 local copilot_config = require("dimaportenko/copilot").config;
 
--- Install your plugins here
-require("lazy").setup({
+return {
   -- My plugins here
   "nvim-lua/popup.nvim",          -- An implementation of the Popup API from vim in Neovim
   "nvim-lua/plenary.nvim",        -- Useful lua functions used ny lots of plugins
@@ -134,7 +116,6 @@ require("lazy").setup({
 
   -- Git
   "lewis6991/gitsigns.nvim",
-  "f-person/git-blame.nvim",
   "tpope/vim-fugitive",
 
   -- use {
@@ -176,4 +157,4 @@ require("lazy").setup({
   -- use "~/work/nvim/plugins/stackmap.nvim"
   -- use "~/work/nvim/plugins/rntools.nvim"
 
-})
+}
