@@ -1,6 +1,6 @@
 require "dimaportenko.options"
-require "dimaportenko.keymaps"
 require "dimaportenko.plugins"
+require "dimaportenko.keymaps"
 require "dimaportenko.colorscheme"
 require "dimaportenko.cmp"
 require "dimaportenko.lsp"

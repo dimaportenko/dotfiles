@@ -5,3 +5,5 @@ plugin
 
 # nvim
 .nvim
+
+lazy-lock.json
