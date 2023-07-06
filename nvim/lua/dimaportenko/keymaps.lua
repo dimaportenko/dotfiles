@@ -139,6 +139,7 @@ function _RUN_FORMAT_BY_FILETYPE()
     "typescript",
     "typescriptreact",
     "yaml",
+    "liquid",
   }
 
   if is_filetype_in_list(file_type, filetypes) then -- Add keymaps for Prettier files

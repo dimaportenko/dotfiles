@@ -1,5 +1,5 @@
--- Copilot config
-local copilot_config = require("dimaportenko/copilot").config;
+-- -- Copilot config
+-- local copilot_config = require("dimaportenko/copilot").config;
 
 return {
   -- My plugins here
@@ -36,22 +36,8 @@ return {
     dependencies = {
       -- copilot
       'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip',
-      {
-        "zbirenbaum/copilot.lua",
-        event = { "VimEnter" },
-        config = function()
-          vim.defer_fn(function()
-            require("copilot").setup(copilot_config)
-          end, 100)
-        end,
-      },
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup()
-        end
-      },
-
+      -- "zbirenbaum/copilot.lua",
+      -- "zbirenbaum/copilot-cmp",
     }
   }, -- The completion plugin
 
