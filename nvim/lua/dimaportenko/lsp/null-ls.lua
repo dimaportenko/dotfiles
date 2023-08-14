@@ -6,7 +6,8 @@ end
 null_ls.setup({
   debug = true,
   sources = {
-    require("null-ls").builtins.formatting.eslint
+    require("null-ls").builtins.formatting.eslint,
+    require("null-ls").builtins.formatting.swiftformat,
   }
 })
 

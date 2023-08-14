@@ -76,7 +76,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
 -- keymap("n", "<leader>t", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
-keymap("n", "<leader>;", "<cmd>Telescope toggleterm<cr>", opts)
+-- keymap("n", "<leader>;", "<cmd>Telescope toggleterm<cr>", opts)
 keymap("n", "<leader>co", "<cmd>Telescope commands<cr>", opts)
 keymap("n", "<leader>[", "<cmd>Telescope resume<cr>", opts)
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
@@ -104,6 +104,7 @@ keymap("n", "<M-l>", ":Prettier<cr>", opts)
 -- keymap("n", "<leader>cf", ":Format<cr>", opts)
 
 keymap("n", "<leader>p", ":Telescope project_cli_commands open<cr>", opts)
+keymap("n", "<leader>;", ":Telescope project_cli_commands running<cr>", opts)
 
 -- switch case 
 vim.api.nvim_set_keymap(

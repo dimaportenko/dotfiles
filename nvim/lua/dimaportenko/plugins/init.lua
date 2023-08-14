@@ -89,7 +89,14 @@ return {
   -- use "~/work/nvim/plugins/telescope-simulators.nvim"
   "dimaportenko/telescope-simulators.nvim",
 
-  { dir = "~/work/nvim/plugins/project-cli-commands.nvim" },
+  {
+    dir = "~/work/nvim/plugins/project-cli-commands.nvim",
+
+    dependencies = {
+      "akinsho/toggleterm.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 
   -- Treesitter
   {
@@ -116,18 +123,18 @@ return {
   "milisims/nvim-luaref",
 
 
-  {
-    dir = "~/work/nvim/plugins/telescope-toggleterm.nvim",
-    dependencies = {
-      "akinsho/nvim-toggleterm.lua",
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("telescope").load_extension "toggleterm"
-    end,
-  },
+  -- {
+  --   dir = "~/work/nvim/plugins/telescope-toggleterm.nvim",
+  --   dependencies = {
+  --     "akinsho/nvim-toggleterm.lua",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-lua/popup.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     require("telescope").load_extension "toggleterm"
+  --   end,
+  -- },
 
   -- debugging
   'mfussenegger/nvim-dap',
