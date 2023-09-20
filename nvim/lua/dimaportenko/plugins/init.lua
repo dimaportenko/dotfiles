@@ -7,8 +7,8 @@ return {
   "nvim-lua/plenary.nvim",        -- Useful lua functions used ny lots of plugins
   "windwp/nvim-autopairs",        -- Autopairs, integrates with both cmp and treesitter
   "numToStr/Comment.nvim",        -- Easily comment stuff
-  "kyazdani42/nvim-web-devicons", -- devicons for the tree explorer
-  "kyazdani42/nvim-tree.lua",     -- tree explorer plugin
+  -- "kyazdani42/nvim-web-devicons", -- devicons for the tree explorer
+  -- "kyazdani42/nvim-tree.lua",     -- tree explorer plugin
   "akinsho/bufferline.nvim",      -- buffers ui
   "moll/vim-bbye",                -- buffers ui dependencies
   "akinsho/toggleterm.nvim",      -- toggle terminal
@@ -89,21 +89,12 @@ return {
   -- use "~/work/nvim/plugins/telescope-simulators.nvim"
   "dimaportenko/telescope-simulators.nvim",
 
-  {
-    dir = "~/work/nvim/plugins/project-cli-commands.nvim",
-
-    dependencies = {
-      "akinsho/toggleterm.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
   },
-  'nvim-treesitter/nvim-treesitter-context',
+  -- 'nvim-treesitter/nvim-treesitter-context',
 
   "JoosepAlviste/nvim-ts-context-commentstring",
 
