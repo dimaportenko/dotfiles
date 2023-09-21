@@ -7,8 +7,6 @@ return {
   "nvim-lua/plenary.nvim",        -- Useful lua functions used ny lots of plugins
   "windwp/nvim-autopairs",        -- Autopairs, integrates with both cmp and treesitter
   "numToStr/Comment.nvim",        -- Easily comment stuff
-  -- "kyazdani42/nvim-web-devicons", -- devicons for the tree explorer
-  -- "kyazdani42/nvim-tree.lua",     -- tree explorer plugin
   "akinsho/bufferline.nvim",      -- buffers ui
   "moll/vim-bbye",                -- buffers ui dependencies
   "akinsho/toggleterm.nvim",      -- toggle terminal
@@ -102,30 +100,9 @@ return {
   "lewis6991/gitsigns.nvim",
   "tpope/vim-fugitive",
 
-  -- use {
-  --   "folke/which-key.nvim",
-  --   config = function()
-  --     require("which-key").setup {}
-  --   end
-  -- }
-
   -- Docs
   "nanotee/luv-vimdocs", -- lua docs in nvim help
   "milisims/nvim-luaref",
-
-
-  -- {
-  --   dir = "~/work/nvim/plugins/telescope-toggleterm.nvim",
-  --   dependencies = {
-  --     "akinsho/nvim-toggleterm.lua",
-  --     "nvim-telescope/telescope.nvim",
-  --     "nvim-lua/popup.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   config = function()
-  --     require("telescope").load_extension "toggleterm"
-  --   end,
-  -- },
 
   -- debugging
   'mfussenegger/nvim-dap',
@@ -136,9 +113,4 @@ return {
 
   -- rust tools
   'simrat39/rust-tools.nvim',
-
-  -- Local plugins
-  -- use "~/work/nvim/plugins/stackmap.nvim"
-  -- use "~/work/nvim/plugins/rntools.nvim"
-
 }
