@@ -78,6 +78,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 -- keymap("n", "<leader>;", "<cmd>Telescope toggleterm<cr>", opts)
 keymap("n", "<leader>[", "<cmd>Telescope resume<cr>", opts)
+keymap("n", "<leader>st", "<cmd>Telescope lsp_document_symbols<cr>", opts)
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 -- vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -127,6 +128,14 @@ local function is_filetype_in_list(file_type, filetypes)
   return false
 end
 
+local function swiftformat_buffer()
+  local current_file = vim.fn.expand('%:p')
+  vim.cmd('write') -- Save the buffer before formatting
+  vim.cmd('!swiftformat ' .. current_file)
+  vim.cmd('edit') -- Reload the buffer to reflect changes
+end
+
+
 function _RUN_FORMAT_BY_FILETYPE()
   local file_type = vim.bo.filetype
 
@@ -149,6 +158,8 @@ function _RUN_FORMAT_BY_FILETYPE()
 
   if is_filetype_in_list(file_type, filetypes) then -- Add keymaps for Prettier files
     vim.cmd("Prettier")
+  elseif file_type == "swift" then -- Add keymaps for Swift files
+    swiftformat_buffer()
   else -- Add keymaps for other files
     vim.cmd("Format")
   end
