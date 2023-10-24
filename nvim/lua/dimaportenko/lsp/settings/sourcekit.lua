@@ -1,8 +1,9 @@
 return {
   settings = {
-    cmd = {
-      "xcrun", "sourcekit-lsp"
-    },
+    cmd = { '/usr/bin/sourcekit-lsp' },
+    -- cmd = {
+    --   "xcrun", "sourcekit-lsp"
+    -- },
     filetypes = { 'swift' },
   },
 }

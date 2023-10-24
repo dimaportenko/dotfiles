@@ -38,6 +38,7 @@ window:
   # padding:
   #   x: 10
   #   y: 10
+  option_as_alt: OnlyLeft
 
   startup_mode: Maximized
 

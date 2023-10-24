@@ -1,6 +1,9 @@
 return {
   "f-person/git-blame.nvim",
-  init = function ()
-    vim.g.gitblame_enabled = 0
+  config = function()
+    require('gitblame').setup {
+      --Note how the `gitblame_` prefix is omitted in `setup`
+      enabled = false,
+    }
   end
 }

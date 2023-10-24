@@ -1,7 +1,8 @@
 require("mason").setup()
 
-require 'lspconfig'.sourcekit.setup {}
-
+require 'lspconfig'.sourcekit.setup {
+  cmd = { '/usr/bin/sourcekit-lsp' }
+}
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
@@ -21,6 +22,13 @@ mason_lspconfig.setup {
 require("dimaportenko.lsp.handlers").setup()
 local on_attach = require("dimaportenko.lsp.handlers").on_attach
 local capabilities = require("dimaportenko.lsp.handlers").capabilities
+
+require 'lspconfig'.sourcekit.setup {
+  cmd = { '/usr/bin/sourcekit-lsp' },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 
 mason_lspconfig.setup_handlers {
   function(server_name)

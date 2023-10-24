@@ -88,7 +88,7 @@ vim.keymap.set('n', '<leader>co', require('telescope.builtin').commands, { desc 
 
 -- harpoon
 vim.keymap.set('n', '<leader>sh', require("harpoon.ui").toggle_quick_menu, { desc = '[S]earch [H]arpoon' })
-vim.keymap.set('n', '<leader>dh', require("harpoon.mark").add_file, { desc = 'ad[D] [H]arpoon' })
+vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file, { desc = '[H]arpoon [A]dd' })
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
@@ -104,12 +104,15 @@ keymap("n", "<leader>cl", ":ccl<cr>", opts)
 
 -- Prettier
 -- keymap("n", "<M-p>", ":Prettier<cr>", opts)
-keymap("n", "<M-l>", ":Prettier<cr>", opts)
+-- keymap("n", "<M-l>", ":Prettier<cr>", opts)
 -- keymap("n", "<leader>l", ":Prettier<cr>", opts)
 -- keymap("n", "<leader>cf", ":Format<cr>", opts)
 
 keymap("n", "<leader>p", ":Telescope project_cli_commands open<cr>", opts)
 keymap("n", "<leader>;", ":Telescope project_cli_commands running<cr>", opts)
+
+-- Copilot
+keymap("n", "<leader>cp", ":Copilot panel<cr>", opts)
 
 -- switch case 
 vim.api.nvim_set_keymap(
