@@ -70,6 +70,9 @@ cmd("AdbReverseTcp", "!adb reverse tcp:8081 tcp:8081", {})
 -- lsof -i:8081 -t | xargs kill -9
 cmd("KillReactNativeBundler", "!lsof -i:8081 -t | xargs kill -9", {})
 
+-- Telescope simulators run
+cmd("SimulatorsRun", "Telescope simulators run", {})
+
 -- live_grep for selected node in nvim-tree
 -- https://github.com/alexander-born/.cfg/blob/aa6475fd2b696ea07209e68a6db068cacff8e205/nvim/.config/nvim/lua/config/nvimtree.lua#L23
 function _LIVE_GREP_AT_NVIM_TREE_NODE()

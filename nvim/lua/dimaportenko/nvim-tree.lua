@@ -26,6 +26,10 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Open'))
 
+  -- keymap move cursor 10 lines - 10j 10k
+  vim.keymap.set('n', 'S-j', ':execute "normal! 10j"<CR>', opts('Jump 10 lines down'))
+  vim.keymap.set('n', 'S-k', ':execute "normal! 10k"<CR>', opts('Jump 10 lines up'))
+
   -- vim.keymap.set('n', 'h', api.node, opts('Close'))
   -- mappings = {
   --   custom_only = false,

@@ -46,7 +46,11 @@ end
 
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
+  if client.name == "ruff_lsp" then
+    return
+  end
   if client.server_capabilities.documentFormattingProvider then
+    print("LSP: documentFormattingProvider", client.name)
     vim.api.nvim_exec(
       [[
       augroup lsp_document_highlight
@@ -72,11 +76,12 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  -- vim.api.nvim_set_keymap("n", "<leader>i", ":lua vim.diagnostic.open_float(nil, {focus=true, scope="cursor"})<CR>", opts)
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
     "gl",
-    '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
+    '<cmd>lua vim.diagnostic.open_float({focus=true, scope="cursor"})<CR>',
     opts
   )
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
