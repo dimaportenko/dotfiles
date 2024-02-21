@@ -50,5 +50,5 @@ function _LAZYGIT()
 	lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _LAZYGIT()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _LAZYGIT()<CR>", opts)
 -- End Lazygit

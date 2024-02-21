@@ -85,6 +85,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>co', require('telescope.builtin').commands, { desc = '[C][O]mmands' })
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_status, { desc = '[G][F]iles' })
 
 -- harpoon
 vim.keymap.set('n', '<leader>sh', require("harpoon.ui").toggle_quick_menu, { desc = '[S]earch [H]arpoon' })

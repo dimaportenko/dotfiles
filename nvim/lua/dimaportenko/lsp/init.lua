@@ -9,7 +9,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 local servers = {
   lua_ls = require "dimaportenko.lsp.settings.lua_ls".settings,
   rust_analyzer = require "dimaportenko.lsp.settings.rust_analyzer".settings,
-  clangd = require "dimaportenko.lsp.settings.clangd".settings,
+  -- clangd = require "dimaportenko.lsp.settings.clangd".settings,
   -- gopls = require "dimaportenko.lsp.settings.gopls".settings,
   -- ruff_lsp = require "dimaportenko.lsp.settings.ruff".settings,
   -- pylsp = require "dimaportenko.lsp.settings.pylsp".settings,
@@ -42,6 +42,7 @@ require 'lspconfig'.sourcekit.setup {
 }
 
 require 'dimaportenko.lsp.settings.gopls'
+require 'dimaportenko.lsp.settings.clangd'
 
 mason_lspconfig.setup_handlers {
   function(server_name)
