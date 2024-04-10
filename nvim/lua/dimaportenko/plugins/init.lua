@@ -3,14 +3,14 @@
 
 return {
   -- My plugins here
-  "nvim-lua/popup.nvim",          -- An implementation of the Popup API from vim in Neovim
-  "nvim-lua/plenary.nvim",        -- Useful lua functions used ny lots of plugins
-  "windwp/nvim-autopairs",        -- Autopairs, integrates with both cmp and treesitter
-  "numToStr/Comment.nvim",        -- Easily comment stuff
-  "akinsho/bufferline.nvim",      -- buffers ui
-  "moll/vim-bbye",                -- buffers ui dependencies
-  "akinsho/toggleterm.nvim",      -- toggle terminal
-  "hoob3rt/lualine.nvim",         -- statusline"
+  "nvim-lua/popup.nvim",     -- An implementation of the Popup API from vim in Neovim
+  "nvim-lua/plenary.nvim",   -- Useful lua functions used ny lots of plugins
+  "windwp/nvim-autopairs",   -- Autopairs, integrates with both cmp and treesitter
+  "numToStr/Comment.nvim",   -- Easily comment stuff
+  "akinsho/bufferline.nvim", -- buffers ui
+  "moll/vim-bbye",           -- buffers ui dependencies
+  "akinsho/toggleterm.nvim", -- toggle terminal
+  "hoob3rt/lualine.nvim",    -- statusline"
 
   -- Lazy loading:
   -- Load on specific commands
@@ -33,7 +33,9 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       -- copilot
-      'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
       -- "zbirenbaum/copilot.lua",
       -- "zbirenbaum/copilot-cmp",
     }
@@ -113,4 +115,7 @@ return {
 
   -- rust tools
   'simrat39/rust-tools.nvim',
+
+  -- ts tools
+  'dmmulroy/ts-error-translator.nvim',
 }

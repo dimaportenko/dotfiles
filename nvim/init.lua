@@ -19,6 +19,5 @@ require "dimaportenko.globals"
 require "dimaportenko.rntools"
 require "dimaportenko.custom"
 require "dimaportenko.simulators"
-require "dimaportenko.dap"
 
 require "dimaportenko.rust-tools"
