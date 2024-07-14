@@ -87,6 +87,9 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>co', require('telescope.builtin').commands, { desc = '[C][O]mmands' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_status, { desc = '[G][F]iles' })
 
+-- lsp
+vim.keymap.set('n', '<leader>lr', "<cmd>LspRestart <cr>", opts)
+
 -- harpoon
 vim.keymap.set('n', '<leader>sh', require("harpoon.ui").toggle_quick_menu, { desc = '[S]earch [H]arpoon' })
 vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file, { desc = '[H]arpoon [A]dd' })

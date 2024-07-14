@@ -7,7 +7,7 @@ return {
   "nvim-lua/plenary.nvim",   -- Useful lua functions used ny lots of plugins
   "windwp/nvim-autopairs",   -- Autopairs, integrates with both cmp and treesitter
   "numToStr/Comment.nvim",   -- Easily comment stuff
-  "akinsho/bufferline.nvim", -- buffers ui
+  -- "akinsho/bufferline.nvim", -- buffers ui
   "moll/vim-bbye",           -- buffers ui dependencies
   "akinsho/toggleterm.nvim", -- toggle terminal
   "hoob3rt/lualine.nvim",    -- statusline"
