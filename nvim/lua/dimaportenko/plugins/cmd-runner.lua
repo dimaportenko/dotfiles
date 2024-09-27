@@ -1,5 +1,6 @@
 return {
-  dir = "~/work/nvim/plugins/project-cli-commands.nvim",
+  "dimaportenko/project-cli-commands.nvim",
+  -- dir = "~/work/nvim/plugins/project-cli-commands.nvim",
 
   dependencies = {
     "akinsho/toggleterm.nvim",

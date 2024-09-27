@@ -10,6 +10,11 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Jump to previous buffer
+-- keymap('n', '<C-Tab>', '<C-^>', opts)
+keymap('n', '<leader>n', '<C-^>', opts)
+keymap('n', '<leader><Tab>', '<C-^>', opts)
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",

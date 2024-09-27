@@ -49,6 +49,9 @@ local function lsp_highlight_document(client)
   if client.name == "ruff_lsp" then
     return
   end
+  if client.name == "tsserver" then
+    return
+  end
   if client.server_capabilities.documentFormattingProvider then
     print("LSP: documentFormattingProvider", client.name)
     vim.api.nvim_exec(

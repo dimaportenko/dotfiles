@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "zbirenbaum/copilot-cmp",
   dependencies = "copilot.lua",
   opts = {},

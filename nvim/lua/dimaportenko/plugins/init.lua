@@ -36,6 +36,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
+      'supermaven-inc/supermaven-nvim',
       -- "zbirenbaum/copilot.lua",
       -- "zbirenbaum/copilot-cmp",
     }

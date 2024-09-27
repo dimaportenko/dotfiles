@@ -29,6 +29,7 @@ local kind_icons = {
   Class = "",
   Interface = "",
   Module = "",
+  Supermaven = "",
   Property = "",
   Unit = "",
   Value = "",
@@ -49,6 +50,13 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
+  -- completion = {
+  --   autocomplete = {
+  --     cmp.TriggerEvent.TextChanged,
+  --     cmp.TriggerEvent.InsertEnter,
+  --   },
+  --   completeopt = "menuone,noinsert,noselect",
+  -- },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -114,6 +122,7 @@ cmp.setup {
         path = "[Path]",
         npm = "[NPM]",
         copilot = "[Copilot]",
+        supermaven = "[Supermaven]",
       })[entry.source.name]
       return vim_item
     end,
@@ -123,16 +132,21 @@ cmp.setup {
     { name = "nvim_lsp", group_index = 2 },
 
     -- npm
-    { name = "npm", group_index = 1  },
+    { name = "npm",      group_index = 1 },
 
     -- Copilot Source
-    { name = "copilot", group_index = 2 },
+    -- { name = "copilot",    group_index = 2 },
+
+    -- Supermaven
+    { name = "supermaven",
+      keyword_length = 0
+    },
 
     -- Other Sources
     { name = "nvim_lua", group_index = 2 },
-    { name = "luasnip", group_index = 2 },
-    { name = "buffer", group_index = 2 },
-    { name = "path", group_index = 2 },
+    { name = "luasnip",  group_index = 2 },
+    { name = "buffer",   group_index = 2 },
+    { name = "path",     group_index = 2 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -143,6 +157,26 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+-- `:` cmdline setup.
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline({
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item()),
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item()),
+    -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+  }),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    },
+    mapping = cmp.mapping.preset.cmdline({}), -- fixes supertab
+  }),
+})
 
 -- https://github.com/hrsh7th/nvim-cmp/issues/1197#issuecomment-1264605106
 --
@@ -161,3 +195,19 @@ cmp.setup {
 --   end)
 -- EOF
 -- endfunction
+
+-- Add this autocmd after the cmp.setup call
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   callback = function()
+--     vim.schedule(function()
+--       cmp = require('cmp')
+--       cmp.complete({
+--         config = {
+--           sources = {
+--             { name = 'supermaven' }
+--           }
+--         }
+--       })
+--     end)
+--   end
+-- })
