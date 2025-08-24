@@ -21,3 +21,4 @@ require "dimaportenko.custom"
 require "dimaportenko.simulators"
 
 require "dimaportenko.rust-tools"
+require "dimaportenko.claude-code"

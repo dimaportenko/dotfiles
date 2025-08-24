@@ -40,8 +40,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-l>", ":bnext<CR>", opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Split
 keymap("n", "ss", ":split<Enter>", opts)
@@ -95,6 +95,19 @@ vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_status, { des
 -- lsp
 vim.keymap.set('n', '<leader>lr', "<cmd>LspRestart <cr>", opts)
 
+-- vim diagnostics
+vim.keymap.set("n", "gl", function()
+  local float_bufnr, win_id = vim.diagnostic.open_float({
+    scope = "cursor",
+    border = "rounded",
+    source = "always",
+  })
+
+  if win_id then
+    vim.api.nvim_set_current_win(win_id)
+  end
+end, { buffer = bufnr, desc = "Open diagnostic float and focus" })
+
 -- harpoon
 vim.keymap.set('n', '<leader>sh', require("harpoon.ui").toggle_quick_menu, { desc = '[S]earch [H]arpoon' })
 vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file, { desc = '[H]arpoon [A]dd' })
@@ -123,7 +136,7 @@ keymap("n", "<leader>;", ":Telescope project_cli_commands running<cr>", opts)
 -- Copilot
 keymap("n", "<leader>cp", ":Copilot panel<cr>", opts)
 
--- switch case 
+-- switch case
 vim.api.nvim_set_keymap(
   'n', '<Leader>sc', '<cmd>lua require("dimaportenko.micro_plugins.switch_case").switch_case()<CR>',
   { noremap = true, silent = true }
@@ -144,7 +157,7 @@ local function swiftformat_buffer()
   local current_file = vim.fn.expand('%:p')
   vim.cmd('write') -- Save the buffer before formatting
   vim.cmd('!swiftformat ' .. current_file)
-  vim.cmd('edit') -- Reload the buffer to reflect changes
+  vim.cmd('edit')  -- Reload the buffer to reflect changes
 end
 
 
@@ -168,14 +181,32 @@ function _RUN_FORMAT_BY_FILETYPE()
     "liquid",
   }
 
-  if is_filetype_in_list(file_type, filetypes) then -- Add keymaps for Prettier files
+  local function is_lsp_active(name)
+    local clients = vim.lsp.get_active_clients()
+    for _, client in ipairs(clients) do
+      if client.name == name then
+        return true
+      end
+    end
+    return false
+  end
+
+  if is_lsp_active("denols") then
+    print("Formatting Deno project")
+    vim.lsp.buf.format()
+  elseif is_filetype_in_list(file_type, filetypes) then
+    print("Formatting Prettier project")
     vim.cmd("Prettier")
-  elseif file_type == "swift" then -- Add keymaps for Swift files
+  elseif file_type == "swift" then
     swiftformat_buffer()
-  else -- Add keymaps for other files
-    vim.cmd("Format")
+  else
+    vim.lsp.buf.format()
+    -- vim.cmd("Format")
   end
 end
 
-vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua _RUN_FORMAT_BY_FILETYPE()<CR>", opts)
+-- vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua _RUN_FORMAT_BY_FILETYPE()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<A-S-l>", "<cmd>lua _RUN_FORMAT_BY_FILETYPE()<CR>", opts)
 
+-- Claude Code
+vim.keymap.set('n', '<leader>k', '<cmd>ClaudeCode<CR>', { desc = 'Toggle Claude Code' })

@@ -36,6 +36,9 @@ vim.opt.guifont = "monospace:h17"               -- the font used in graphical ne
 
 vim.opt.shortmess:append "c"
 
+-- vim.opt.shell = '/bin/zsh'                      -- default neovim terminal and commands to zsh
+-- vim.opt.shellcmdflag = '-c'                     -- run zsh with '-c' flag 
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work

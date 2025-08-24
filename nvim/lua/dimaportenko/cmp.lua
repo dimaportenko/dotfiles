@@ -138,8 +138,10 @@ cmp.setup {
     -- { name = "copilot",    group_index = 2 },
 
     -- Supermaven
-    { name = "supermaven",
-      keyword_length = 0
+    { 
+      name = "supermaven",
+      -- keyword_length = 0,
+      group_index = 2
     },
 
     -- Other Sources

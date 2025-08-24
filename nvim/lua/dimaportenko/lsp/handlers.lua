@@ -1,5 +1,7 @@
 local M = {}
 
+M.is_denols_attached = false
+
 -- TODO: backfill this to template
 M.setup = function()
   local signs = {
@@ -49,7 +51,7 @@ local function lsp_highlight_document(client)
   if client.name == "ruff_lsp" then
     return
   end
-  if client.name == "tsserver" then
+  if client.name == "ts_ls" then
     return
   end
   if client.server_capabilities.documentFormattingProvider then
@@ -68,6 +70,7 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
+  print("lsp_keymaps", bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -79,7 +82,7 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  -- vim.api.nvim_set_keymap("n", "<leader>i", ":lua vim.diagnostic.open_float(nil, {focus=true, scope="cursor"})<CR>", opts)
+  -- vim.api.nvim_set_keymap("n", "<leader>i", ":lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
@@ -95,8 +98,12 @@ end
 M.on_attach = function(client, bufnr)
   -- print("LSP attached.", client.name)
 
-  -- if client.name == "tsserver" then
+  -- if client.name == "ts_ls" then
   --   client.resolved_capabilities.document_formatting = false
+  -- end
+
+  -- if client.name == "denols" then
+  --   M.is_denols_attached = true
   -- end
 
   lsp_keymaps(bufnr)

@@ -6,7 +6,7 @@ local api = vim.api
 local opts = { noremap = true, silent = true }
 
 function _CUSTOM_SETUP()
-  cmd("RnStart", "terminal yarn start", {})
+  cmd("RnStart", "terminal bun start", {})
 end
 
 function _COPY_TO_CLIPBOARD(value)
@@ -79,7 +79,10 @@ function _LIVE_GREP_AT_NVIM_TREE_NODE()
   -- node pcall
   local ok, node = pcall(require('nvim-tree.lib').get_node_at_cursor)
   -- local node = require('nvim-tree.lib').get_node_at_cursor()
-  if not ok then return end
+  if not ok then
+    print("can't access nvim-tree node")
+    return
+  end
 
   if not node then return end
   require('telescope.builtin').live_grep({ search_dirs = { node.absolute_path } })

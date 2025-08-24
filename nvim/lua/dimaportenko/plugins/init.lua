@@ -78,7 +78,6 @@ return {
     'folke/neodev.nvim',
   },
 
-  "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
   "MunifTanjim/prettier.nvim",       -- prettier
 
   -- Telescope
