@@ -7,6 +7,7 @@ return {
       transparent_background = true,
       float = {
         transparent = true,
+        solid = true,
       },
       flavour = "mocha",
       lsp_styles = {
