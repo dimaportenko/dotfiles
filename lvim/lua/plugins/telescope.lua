@@ -13,6 +13,11 @@ return {
   },
   -- change some options
   opts = {
+    pickers = {
+      find_files = {
+        previewer = false,
+      },
+    },
     defaults = {
       hidden = false,
 
@@ -43,6 +48,8 @@ return {
 
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
+          ["<A-h>"] = actions.results_scrolling_left,
+          ["<A-l>"] = actions.results_scrolling_right,
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -80,8 +87,12 @@ return {
           ["<C-h>"] = actions.preview_scrolling_left,
           ["<C-l>"] = actions.preview_scrolling_right,
 
+          ["<C-f>"] = require("telescope.actions.layout").toggle_preview,
+
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
+          ["<A-h>"] = actions.results_scrolling_left,
+          ["<A-l>"] = actions.results_scrolling_right,
 
           ["?"] = actions.which_key,
         },
