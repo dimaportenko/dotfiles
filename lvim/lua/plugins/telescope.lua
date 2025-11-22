@@ -1,4 +1,26 @@
 local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+-- Custom action to toggle hidden files
+local toggle_hidden = function(prompt_bufnr)
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local opts = picker.finder.opts or {}
+
+  -- Toggle hidden flag
+  opts.hidden = not opts.hidden
+  opts.no_ignore = opts.hidden
+
+  -- Restart picker with new options
+  local current_prompt = picker:_get_prompt()
+  actions.close(prompt_bufnr)
+
+  require("telescope.builtin").find_files({
+    hidden = opts.hidden,
+    no_ignore = opts.hidden,
+    default_text = current_prompt,
+  })
+end
+
 -- local mappings = require "telescope.mappings"
 return {
   "nvim-telescope/telescope.nvim",
@@ -45,6 +67,7 @@ return {
           ["<C-l>"] = actions.preview_scrolling_right,
 
           ["<C-f>"] = require("telescope.actions.layout").toggle_preview,
+          ["<C-g>"] = toggle_hidden, -- Toggle hidden/ignored files
 
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
@@ -88,6 +111,7 @@ return {
           ["<C-l>"] = actions.preview_scrolling_right,
 
           ["<C-f>"] = require("telescope.actions.layout").toggle_preview,
+          ["<C-g>"] = toggle_hidden, -- Toggle hidden/ignored files
 
           ["<PageUp>"] = actions.results_scrolling_up,
           ["<PageDown>"] = actions.results_scrolling_down,
