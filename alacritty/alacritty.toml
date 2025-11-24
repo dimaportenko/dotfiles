@@ -1,0 +1,44 @@
+
+[colors.primary]
+foreground = "#7F849C"
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+dynamic_title = true
+opacity = 0.95
+option_as_alt = "OnlyLeft"
+startup_mode = "Maximized"
+
+[window.position]
+x = 0
+y = 0
+
+[general]
+import = [
+  "/Users/dmitriyportenko/.config/alacritty/catppuccin/catppuccin-mocha.toml",
+]
+
+[keyboard]
+bindings = [
+  { key = "L", mods = "Command", chars = "\u000c" },
+  { key = "O", mods = "Command", chars = "\u000f" },
+]
