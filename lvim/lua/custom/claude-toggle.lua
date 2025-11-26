@@ -37,7 +37,7 @@ local function close_window()
 end
 
 -- Open the Claude window
-local function open_window()
+local function open_window(options)
   -- Create or reuse buffer
   if not is_buffer_valid(claude_state.buf) then
     -- Create new terminal buffer
@@ -58,7 +58,11 @@ local function open_window()
   if vim.bo[claude_state.buf].buftype ~= "terminal" then
     vim.cmd.term()
     local job_id = vim.bo[claude_state.buf].channel
-    vim.fn.chansend(job_id, "claude\n\r")
+    local command = "claude\n\r"
+    if options ~= nil and options.continue == true then
+      command = "claude --continue\n\r"
+    end
+    vim.fn.chansend(job_id, command)
   end
 
   -- Enter insert mode in the terminal
@@ -72,11 +76,11 @@ local function open_window()
 end
 
 -- Toggle function
-function M.toggle()
+function M.toggle(opts)
   if is_window_visible(claude_state.win) then
     close_window()
   else
-    open_window()
+    open_window(opts)
   end
 end
 
@@ -90,6 +94,13 @@ function M.setup()
   vim.keymap.set("n", "<C-O>", function()
     M.toggle()
   end, { noremap = true, silent = true, desc = "Toggle Claude terminal" })
+
+  --
+  vim.api.nvim_create_user_command("ClaudeToggleContinue", function()
+    M.toggle({
+      continue = true,
+    })
+  end, {})
 end
 
 -- Auto-setup when required
