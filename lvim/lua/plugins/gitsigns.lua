@@ -29,6 +29,7 @@ return {
         -- map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         -- map({ "n", "x" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
         map({ "n", "x" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", "<leader>hp", gs.preview_hunk, "Preview git hunk")
         -- map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
         -- map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
         -- map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
