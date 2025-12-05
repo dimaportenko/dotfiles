@@ -1,7 +1,7 @@
 {
   "extras": [
     "lazyvim.plugins.extras.ai.claudecode",
-    "lazyvim.plugins.extras.ai.copilot",
+    "lazyvim.plugins.extras.ai.codeium",
     "lazyvim.plugins.extras.editor.neo-tree",
     "lazyvim.plugins.extras.editor.telescope",
     "lazyvim.plugins.extras.formatting.prettier",
