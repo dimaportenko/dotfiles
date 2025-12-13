@@ -18,3 +18,10 @@ map({ "n" }, "<leader>;", "<cmd>Telescope project_cli_commands running<cr>", { d
 -- Terminal mode escape
 map("t", "<A-z>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- map("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Copy relative path of current buffer to clipboard
+map("n", "<leader>yp", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end, { desc = "Copy relative path" })

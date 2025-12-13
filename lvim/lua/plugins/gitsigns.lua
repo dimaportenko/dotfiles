@@ -11,6 +11,20 @@ return {
         end
 
         -- stylua: ignore start
+        map("n", "]g", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]g", bang = true })
+          else
+            gs.nav_hunk("next")
+          end
+        end, "Next Hunk")
+        map("n", "[g", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[g", bang = true })
+          else
+            gs.nav_hunk("prev")
+          end
+        end, "Prev Hunk")
         map("n", "]c", function()
           if vim.wo.diff then
             vim.cmd.normal({ "]c", bang = true })

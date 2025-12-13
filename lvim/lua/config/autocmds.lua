@@ -14,3 +14,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+-- Custom commands
+vim.api.nvim_create_user_command("CopyRelativeBufferPath", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end, {})
+
+vim.api.nvim_create_user_command("CopyBufferPath", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end, {})
