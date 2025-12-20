@@ -7,7 +7,7 @@ return {
         provider = "snacks",
         snacks_win_opts = {
           position = "right",
-          width = 0.5, -- 40% of editor width
+          width = 0.5, -- 50% of editor width
         },
       },
     },
