@@ -25,3 +25,6 @@ map("n", "<leader>yp", function()
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy relative path" })
+
+--- jumpt to previous buffer
+map("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" })
