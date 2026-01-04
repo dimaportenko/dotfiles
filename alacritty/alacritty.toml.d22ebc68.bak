@@ -41,5 +41,4 @@ import = [
 bindings = [
   { key = "L", mods = "Command", chars = "\u000c" },
   { key = "O", mods = "Command", chars = "\u000f" },
-  { key = "Return", mods = "Command", chars = "\u001b\r" },
 ]
