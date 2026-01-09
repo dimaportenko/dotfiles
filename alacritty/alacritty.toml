@@ -1,7 +1,4 @@
 
-[colors.primary]
-foreground = "#7F849C"
-
 [font]
 size = 18.0
 
@@ -24,7 +21,7 @@ multiplier = 3
 decorations = "buttonless"
 dynamic_padding = false
 dynamic_title = true
-opacity = 0.95
+# opacity = 0.99
 option_as_alt = "OnlyLeft"
 startup_mode = "Maximized"
 
@@ -34,7 +31,7 @@ y = 0
 
 [general]
 import = [
-  "/Users/dmitriyportenko/.config/alacritty/catppuccin/catppuccin-mocha.toml",
+  "/Users/dmitriyportenko/.config/alacritty/everforest-dark.toml",
 ]
 
 [keyboard]

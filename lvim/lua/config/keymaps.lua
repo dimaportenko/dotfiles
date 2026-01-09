@@ -14,6 +14,7 @@ end, { desc = "Delete All Buffers" })
 
 map({ "n" }, "<leader>p", "<cmd>Telescope project_cli_commands open<cr>", { desc = "Open project tasks" })
 map({ "n" }, "<leader>;", "<cmd>Telescope project_cli_commands running<cr>", { desc = "Running project tasks" })
+map({ "n" }, "<leader>[", "<cmd>Telescope resume<cr>", { desc = "Telescope resume previous search" })
 
 -- Terminal mode escape
 map("t", "<A-z>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
