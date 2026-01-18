@@ -2,9 +2,19 @@ return {
   {
     "coder/claudecode.nvim",
 
+    -- cmd = {
+    --   "ClaudeCode",
+    --   "ClaudeCodeAdd",
+    --   "ClaudeCodeSend",
+    --   "ClaudeCodeTreeAdd",
+    --   "ClaudeCodeOpen",
+    --   "ClaudeCodeClose",
+    --   "ClaudeCodeToggle",
+    --   "ClaudeCodeFocus",
+    -- },
     keys = {
       { "<leader>af", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add file to Claude" },
-      { "<leader>as", "<cmd>ClaudeCodeAdd<cr>", mode = "v", desc = "Add selection to Claude" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
     },
     opts = {
       terminal_cmd = "~/.claude/local/claude",
