@@ -15,7 +15,7 @@ This is a LazyVim-based Neovim configuration featuring:
 ```
 lua/
 ├── config/           # LazyVim config overrides
-│   ├── lazy.lua      # Plugin manager bootstrap (DO NOT MODIFY unless necessary)
+│   ├── lazy.lua      # Plugin manager bootstrap
 │   ├── options.lua   # Global editor options (vim.opt, vim.g)
 │   ├── keymaps.lua   # Custom key bindings
 │   └── autocmds.lua  # Autocommands
@@ -90,25 +90,23 @@ require("telescope.builtin").find_files({...})
 
 ### Plugin Spec Patterns
 
-**Pattern 1: Simple opts (preferred when possible)**
+**Pattern 1: Simple opts (preferred)**
 ```lua
 return {
   "plugin/name",
-  opts = {
-    setting = value,
-  },
+  opts = { setting = value },
 }
 ```
 
-**Pattern 2: Multiple plugins in one file**
+**Pattern 2: Multiple plugins**
 ```lua
 return {
   { "plugin/one", opts = {...} },
-  { "plugin/two", opts = {...} },
+  { "plugin/one", opts = {...} },
 }
 ```
 
-**Pattern 3: With config function (when opts isn't enough)**
+**Pattern 3: With config function**
 ```lua
 return {
   "plugin/name",
@@ -141,7 +139,7 @@ local M = {}
 -- Private state
 local state = { buf = nil, win = nil }
 
--- Private function (local)
+-- Private function
 local function private_helper()
   -- implementation
 end
