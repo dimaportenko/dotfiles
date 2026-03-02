@@ -1,7 +1,7 @@
 return {
   {
-    dir = "~/work/github/claudecode.nvim",
-    -- "coder/claudecode.nvim",
+    -- dir = "~/work/github/claudecode.nvim",
+    "coder/claudecode.nvim",
 
     -- cmd = {
     --   "ClaudeCode",

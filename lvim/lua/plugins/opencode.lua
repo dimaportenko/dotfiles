@@ -1,10 +1,27 @@
 return {
   "NickvanDyke/opencode.nvim",
+  cmd = { "OpencodeAdd", "OpencodeTreeAdd" },
+  keys = {
+    { "<leader>ao", mode = { "n", "x" } },
+    { "<C-x>", mode = { "n", "x" } },
+    { "<C-o>", mode = { "n", "t" } },
+    { "<leader>os", mode = { "n", "x" } },
+    { "goo" },
+    { "<S-C-u>" },
+    { "<S-C-d>" },
+    { "<leader>of" },
+  },
   dependencies = {
     -- Required for snacks provider (input, picker, terminal)
     { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
   },
   config = function()
+    local ok, opencode = pcall(require, "opencode")
+    if not ok then
+      vim.notify("opencode.nvim not available", vim.log.levels.WARN)
+      return
+    end
+
     ---@type opencode.Opts
     vim.g.opencode_opts = {
       provider = {
@@ -22,31 +39,31 @@ return {
 
     -- Keymaps
     vim.keymap.set({ "n", "x" }, "<leader>ao", function()
-      require("opencode").ask("@this: ", { submit = true })
+      opencode.ask("@this: ", { submit = true })
     end, { desc = "Ask opencode" })
 
     vim.keymap.set({ "n", "x" }, "<C-x>", function()
-      require("opencode").select()
+      opencode.select()
     end, { desc = "Execute opencode action…" })
 
     vim.keymap.set({ "n", "t" }, "<C-o>", function()
-      require("opencode").toggle()
+      opencode.toggle()
     end, { desc = "Toggle opencode" })
 
     vim.keymap.set({ "n", "x" }, "<leader>os", function()
-      return require("opencode").operator("@this ")
+      return opencode.operator("@this ")
     end, { expr = true, desc = "Add range to opencode" })
 
     vim.keymap.set("n", "goo", function()
-      return require("opencode").operator("@this ") .. "_"
+      return opencode.operator("@this ") .. "_"
     end, { expr = true, desc = "Add line to opencode" })
 
     vim.keymap.set("n", "<S-C-u>", function()
-      require("opencode").command("session.half.page.up")
+      opencode.command("session.half.page.up")
     end, { desc = "opencode half page up" })
 
     vim.keymap.set("n", "<S-C-d>", function()
-      require("opencode").command("session.half.page.down")
+      opencode.command("session.half.page.down")
     end, { desc = "opencode half page down" })
 
     -- Remap increment/decrement since <C-a> and <C-x> are used by opencode
@@ -57,7 +74,7 @@ return {
     vim.keymap.set("n", "<leader>of", function()
       local file = vim.fn.expand("%:p")
       if file ~= "" then
-        require("opencode").prompt("@" .. file)
+        opencode.prompt("@" .. file)
       else
         vim.notify("No file in current buffer", vim.log.levels.WARN)
       end
@@ -67,7 +84,7 @@ return {
     vim.api.nvim_create_user_command("OpencodeAdd", function(opts)
       local file = opts.args
       if file and file ~= "" then
-        require("opencode").prompt("@" .. file)
+        opencode.prompt("@" .. file)
       end
     end, { nargs = 1, complete = "file", desc = "Add file to opencode" })
 
@@ -75,7 +92,7 @@ return {
     vim.api.nvim_create_user_command("OpencodeTreeAdd", function(opts)
       local dir = opts.args
       if dir and dir ~= "" then
-        require("opencode").prompt("@" .. dir)
+        opencode.prompt("@" .. dir)
       end
     end, { nargs = 1, complete = "dir", desc = "Add directory to opencode" })
   end,

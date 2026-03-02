@@ -16,7 +16,12 @@ return {
             local node = state.tree:get_node()
             local path = node:get_id()
             if path then
-              require("opencode").prompt("@" .. path)
+              local ok, opencode = pcall(require, "opencode")
+              if ok and opencode then
+                opencode.prompt("@" .. path)
+              else
+                vim.notify("opencode not available", vim.log.levels.WARN)
+              end
             end
           end,
         },
