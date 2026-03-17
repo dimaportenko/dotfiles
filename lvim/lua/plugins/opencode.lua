@@ -22,15 +22,26 @@ return {
       return
     end
 
+    local opencode_cmd = "opencode --port 0" -- --port flag required for nvim plugin communication
+    local function half_screen_win_opts()
+      return {
+        split = "right",
+        width = math.floor(vim.o.columns * 0.5),
+      }
+    end
+
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      provider = {
-        cmd = "opencode --port 0", -- --port flag required for nvim plugin communication
-        snacks = {
-          win = {
-            width = 0.5, -- 50% of screen
-          },
-        },
+      server = {
+        start = function()
+          require("opencode.terminal").start(opencode_cmd, half_screen_win_opts())
+        end,
+        stop = function()
+          require("opencode.terminal").stop()
+        end,
+        toggle = function()
+          require("opencode.terminal").toggle(opencode_cmd, half_screen_win_opts())
+        end,
       },
     }
 

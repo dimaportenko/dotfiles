@@ -11,17 +11,35 @@ return {
     local OpenActions = require("project_cli_commands.open_actions")
     local RunActions = require("project_cli_commands.actions")
 
+    local function vertical_panel_width()
+      return math.floor(vim.o.columns * 0.5)
+    end
+
     local config = {
       -- Key mappings bound inside the telescope window
       running_telescope_mapping = {
         ["<C-c>"] = RunActions.exit_terminal,
         ["<C-f>"] = RunActions.open_float,
-        ["<C-v>"] = RunActions.open_vertical,
+        ["<C-v>"] = function(prompt_bufnr)
+          RunActions.open(prompt_bufnr, "vertical", vertical_panel_width())
+        end,
         ["<C-h>"] = RunActions.open_horizontal,
       },
       open_telescope_mapping = {
-        { mode = "i", key = "<CR>", action = OpenActions.execute_script_vertical },
-        { mode = "n", key = "<CR>", action = OpenActions.execute_script_vertical },
+        {
+          mode = "i",
+          key = "<CR>",
+          action = function(prompt_bufnr)
+            OpenActions.execute_script(prompt_bufnr, "vertical", vertical_panel_width())
+          end,
+        },
+        {
+          mode = "n",
+          key = "<CR>",
+          action = function(prompt_bufnr)
+            OpenActions.execute_script(prompt_bufnr, "vertical", vertical_panel_width())
+          end,
+        },
         { mode = "i", key = "<C-h>", action = OpenActions.execute_script },
         { mode = "n", key = "<C-h>", action = OpenActions.execute_script },
         { mode = "i", key = "<C-i>", action = OpenActions.execute_script_with_input },
@@ -30,8 +48,20 @@ return {
         { mode = "n", key = "<C-c>", action = OpenActions.copy_command_clipboard },
         { mode = "i", key = "<C-f>", action = OpenActions.execute_script_float },
         { mode = "n", key = "<C-f>", action = OpenActions.execute_script_float },
-        { mode = "i", key = "<C-v>", action = OpenActions.execute_script_vertical },
-        { mode = "n", key = "<C-v>", action = OpenActions.execute_script_vertical },
+        {
+          mode = "i",
+          key = "<C-v>",
+          action = function(prompt_bufnr)
+            OpenActions.execute_script(prompt_bufnr, "vertical", vertical_panel_width())
+          end,
+        },
+        {
+          mode = "n",
+          key = "<C-v>",
+          action = function(prompt_bufnr)
+            OpenActions.execute_script(prompt_bufnr, "vertical", vertical_panel_width())
+          end,
+        },
       },
     }
 
