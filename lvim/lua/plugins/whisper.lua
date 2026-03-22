@@ -1,5 +1,6 @@
 return {
   "Avi-D-coder/whisper.nvim",
+  enabled = false,
   opts = {
     model = "large-v3",
     keybind = "<C-g>",

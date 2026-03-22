@@ -1,11 +1,6 @@
 return {
   "pablopunk/pi.nvim",
-  cmd = { "PiAsk", "PiAskSelection", "PiCancel" },
-  keys = {
-    { "<leader>ia", mode = { "n", "x" } },
-    { "<leader>is", mode = "x" },
-    { "<leader>if", mode = "n" },
-  },
+  event = "VeryLazy",
   config = function()
     local ok, pi = pcall(require, "pi")
     if ok then
@@ -71,6 +66,7 @@ return {
         pi_win = vim.api.nvim_get_current_win()
         vim.api.nvim_win_set_width(pi_win, math.floor(vim.o.columns * 0.5))
         vim.api.nvim_win_set_buf(pi_win, pi_buf)
+        vim.cmd("startinsert")
       end
     end
 
@@ -88,10 +84,19 @@ return {
       end
 
       vim.fn.chansend(pi_job, text)
+
+      -- Focus the pi terminal window and enter insert mode
+      if pi_win and vim.api.nvim_win_is_valid(pi_win) then
+        vim.api.nvim_set_current_win(pi_win)
+      end
       vim.cmd("startinsert")
     end
 
     local function get_visual_selection()
+      -- Exit visual mode to set '< and '> marks for the current selection
+      local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+      vim.api.nvim_feedkeys(esc, "x", false)
+
       local start_pos = vim.fn.getpos("'<")
       local end_pos = vim.fn.getpos("'>")
       local start_line = start_pos[2]
@@ -132,12 +137,7 @@ return {
       end
 
       local relative_file = vim.fn.fnamemodify(file, ":.")
-      local message = string.format(
-        "@%s#L%d-%d\n",
-        relative_file,
-        selection.start_line,
-        selection.end_line
-      )
+      local message = string.format("@%s#L%d-%d\n", relative_file, selection.start_line, selection.end_line)
 
       send_to_pi(message)
     end
