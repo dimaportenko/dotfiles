@@ -13,6 +13,18 @@ return {
     local pi_win = nil
     local pi_job = nil
 
+    local function set_pi_terminal_keymaps()
+      if not (pi_buf and vim.api.nvim_buf_is_valid(pi_buf)) then
+        return
+      end
+
+      local opts = { buffer = pi_buf, silent = true }
+      vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+      vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+      vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+      vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+    end
+
     local function open_pi_terminal()
       vim.cmd("vsplit")
       pi_win = vim.api.nvim_get_current_win()
@@ -30,6 +42,7 @@ return {
             pi_job = nil
           end,
         })
+        set_pi_terminal_keymaps()
       end
 
       vim.cmd("startinsert")
