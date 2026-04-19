@@ -4,7 +4,7 @@ return {
   keys = {
     { "<leader>ao", mode = { "n", "x" } },
     { "<C-x>", mode = { "n", "x" } },
-    { "<C-o>", mode = { "n", "t" } },
+    { "<leader>oa", mode = { "n" } },
     { "<leader>os", mode = { "n", "x" } },
     { "goo" },
     { "<S-C-u>" },
@@ -57,7 +57,7 @@ return {
       opencode.select()
     end, { desc = "Execute opencode action…" })
 
-    vim.keymap.set({ "n", "t" }, "<C-o>", function()
+    vim.keymap.set({ "n", "t" }, "<leader>oa", function()
       opencode.toggle()
     end, { desc = "Toggle opencode" })
 

@@ -3,21 +3,24 @@ return {
     -- dir = "~/work/github/claudecode.nvim",
     "coder/claudecode.nvim",
 
-    -- cmd = {
-    --   "ClaudeCode",
-    --   "ClaudeCodeAdd",
-    --   "ClaudeCodeSend",
-    --   "ClaudeCodeTreeAdd",
-    --   "ClaudeCodeOpen",
-    --   "ClaudeCodeClose",
-    --   "ClaudeCodeToggle",
-    --   "ClaudeCodeFocus",
-    -- },
+    cmd = {
+      "ClaudeCode",
+      "ClaudeCodeAdd",
+      "ClaudeCodeSend",
+      "ClaudeCodeTreeAdd",
+      "ClaudeCodeOpen",
+      "ClaudeCodeClose",
+      "ClaudeCodeToggle",
+      "ClaudeCodeFocus",
+    },
     keys = {
       { "<leader>af", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add file to Claude" },
       { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      { "<leader>ap", "<cmd>ClaudeCode --dangerously-skip-permissions<cr>", desc = "Claude skip permissions" },
     },
     opts = {
+      -- terminal_cmd = "claude --dangerously-skip-permissions",
+
       -- terminal_cmd = "~/.claude/local/claude",
       diff_opts = {
         enabled = false, -- Disable diff feature
