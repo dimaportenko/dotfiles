@@ -1,9 +1,8 @@
-plugin
-
-# DS_Store
-.DS_Store
-
-# nvim
-.nvim
-
-lazy-lock.json
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data

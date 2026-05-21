@@ -2,80 +2,67 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Neovim Configuration Overview
+## Overview
 
-This is a modular Neovim configuration written in Lua, using lazy.nvim as the plugin manager. The configuration follows a structured approach with clear separation of concerns.
+This is a LazyVim-based Neovim configuration with AI-assisted coding (Claude Code + Copilot), TypeScript/Python language support, and a Catppuccin theme.
 
-## Directory Structure
+## Architecture
 
 ```
-nvim/
-├── init.lua                 # Entry point - loads all modules
-├── lazy-lock.json          # Plugin version lock file
-└── lua/dimaportenko/       # Main configuration modules
-    ├── lazy.lua            # Lazy.nvim bootstrap and setup
-    ├── options.lua         # Neovim options
-    ├── keymaps.lua         # Key mappings
-    ├── colorscheme.lua     # Theme configuration (Catppuccin)
-    ├── lsp/                # Language Server Protocol setup
-    │   ├── init.lua        # LSP initialization with Mason
-    │   ├── handlers.lua    # LSP handlers and capabilities
-    │   ├── none-ls.lua     # Null-ls replacement for formatting/linting
-    │   └── settings/       # Per-language LSP configurations
-    ├── plugins/            # Individual plugin configurations
-    │   └── init.lua        # Plugin list and specs
-    └── [other modules]     # Feature-specific configurations
+lua/
+├── config/           # LazyVim overrides (options, keymaps, autocmds)
+│   ├── lazy.lua      # Plugin manager bootstrap and settings
+│   ├── options.lua   # Global editor options
+│   ├── keymaps.lua   # Custom key bindings
+│   └── autocmds.lua  # Autocommands (e.g., autoformat disabling)
+├── plugins/          # Plugin specs (each file = one plugin config)
+└── custom/           # Custom Lua modules (non-plugin code)
 ```
 
-## Key Components
+**Key conventions:**
+- Plugin configs go in `lua/plugins/` as separate files
+- Each plugin file exports a lazy.nvim spec table
+- LazyVim extras are enabled via `lazyvim.json` (not Lua code)
+- LSP/language support uses LazyVim extras (`lang.typescript`, `lang.python`, etc.)
 
-### Plugin Management
-- **lazy.nvim** - Modern plugin manager with lazy loading support
-- Plugins defined in `plugins/init.lua` with individual configs in `plugins/` directory
-- Lock file (`lazy-lock.json`) ensures consistent versions
+## Commands
 
-### Language Server Protocol (LSP)
-- **Mason** - LSP installer and manager
-- Currently configured servers: `lua_ls`, `rust_analyzer`, `clangd`, `gopls`, `denols`
-- Migrating from null-ls to none-ls for formatting/linting
+**Apply config changes:**
+- Restart Neovim, or `:source %` for the current file
+- `:Lazy sync` - Update plugins and apply lazy-lock.json
 
-### Notable Features
-- **Telescope** - Fuzzy finder with custom simulator picker
-- **nvim-cmp** - Completion with Supermaven AI support
-- **Treesitter** - Advanced syntax highlighting
-- **Git integration** - Gitsigns and fugitive
-- **Terminal** - Toggleterm for integrated terminal
-- **File management** - nvim-tree and oil.nvim
+**Plugin management:**
+- `:Lazy` - Open plugin manager UI
+- `:Lazy update` - Update all plugins
+- `:Mason` - Manage LSP servers, formatters, linters
 
-## Common Commands
+**Claude Code integration:**
+- `:ClaudeCode` or `<C-O>` - Toggle Claude terminal (right panel, 40% width)
 
-### Plugin Management
-- `:Lazy` - Open lazy.nvim UI
-- `:Lazy sync` - Update all plugins
-- `:Lazy health` - Check plugin health
+## Enabled LazyVim Extras
 
-### LSP Commands
-- `:Mason` - Open Mason UI to install/manage language servers
-- `:LspInfo` - Show active LSP clients
-- `:LspRestart` - Restart LSP servers
+From `lazyvim.json`:
+- **AI**: `ai.claudecode`, `ai.copilot`
+- **Languages**: `lang.typescript`, `lang.python`, `lang.json`, `lang.markdown`, `lang.tailwind`, `lang.toml`
+- **Tools**: `formatting.prettier`, `linting.eslint`, `editor.telescope`, `editor.neo-tree`
 
-### Development
-- `<leader>` is mapped to space
-- Check `keymaps.lua` for all custom mappings
+## Key Customizations
 
-## Development Guidelines
+**Completion** (`lua/plugins/blink.lua`): Uses blink.cmp with super-tab preset and Copilot integration
 
-1. **Module Organization**: Each feature should have its own module under `lua/dimaportenko/`
-2. **Plugin Configuration**: Complex plugin configs go in separate files under `plugins/`
-3. **LSP Settings**: Language-specific LSP settings go in `lsp/settings/`
-4. **Lazy Loading**: Use lazy.nvim's features to defer plugin loading when possible
+**Theme** (`lua/plugins/colorscheme.lua`): Catppuccin Mocha with transparent background
 
-## Current TODOs
-- [x] Add tag selection with mini.nvim (mini.ai)
-- [ ] Migrate from null-ls to efm-langserver
+**Autoformat disabled** (`lua/config/autocmds.lua`): For `toml`, `json`, `css` files
 
-## Testing Changes
-After making configuration changes:
-1. Restart Neovim or source the file: `:source %`
-2. Check for errors: `:checkhealth`
-3. For plugin changes: `:Lazy sync` then restart Neovim
+**Custom keymaps** (`lua/config/keymaps.lua`):
+- `<leader>w` - Delete buffer
+- `<leader>p` - Project tasks (Telescope)
+- `<A-z>` / `<C-x>` - Exit terminal mode
+
+**Telescope** (`lua/plugins/telescope.lua`): Heavy customization with `<C-g>` to toggle hidden/ignored files
+
+## Code Style
+
+- Use StyLua for formatting (configured in `stylua.toml`)
+- Follow existing patterns: return lazy.nvim spec tables from plugin files
+- Keep plugin configs minimal; leverage LazyVim defaults where possible

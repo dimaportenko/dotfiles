@@ -1,0 +1,9 @@
+plugin
+
+# DS_Store
+.DS_Store
+
+# nvim
+.nvim
+
+lazy-lock.json

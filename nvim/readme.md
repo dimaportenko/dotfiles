@@ -1,5 +1,4 @@
-# Dima Portenko nvim config
+# 💤 LazyVim
 
-## TODO
-- [x] add tag selection with mini.nvim (mini.ai)
-- [ ] migrate from null-ls to efm-langserver 
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
