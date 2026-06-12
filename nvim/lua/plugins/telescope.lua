@@ -45,7 +45,10 @@ return {
       layout_config = {
         width = 0.96,
         height = 0.8,
-        preview_width = 0.35,
+        -- preview_width must be nested per-strategy: the `center` strategy
+        -- (used by xcodebuild.nvim pickers) rejects it as a top-level key.
+        horizontal = { preview_width = 0.35 },
+        vertical = { preview_width = 0.35 },
       },
 
       mappings = {
