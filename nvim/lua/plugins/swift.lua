@@ -33,33 +33,41 @@ return {
       "MunifTanjim/nui.nvim",
       "mfussenegger/nvim-dap",
     },
+    -- Lazy-load: only pull in xcodebuild (+ telescope/nui/dap) when actually
+    -- doing Swift work — on a .swift buffer, an :Xcodebuild* command, or a
+    -- keybinding below. Keeps it out of the startup path for every other file.
+    ft = { "swift" },
+    cmd = {
+      "XcodebuildPicker", "XcodebuildBuild", "XcodebuildBuildRun", "XcodebuildTest",
+      "XcodebuildSelectScheme", "XcodebuildSelectDevice", "XcodebuildSetup",
+      "XcodebuildToggleLogs",
+    },
+    keys = {
+      -- build / run / test
+      { "<leader>X", "<cmd>XcodebuildPicker<cr>", desc = "Xcodebuild actions" },
+      { "<leader>xb", "<cmd>XcodebuildBuild<cr>", desc = "Build project" },
+      { "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", desc = "Build & run" },
+      { "<leader>xt", "<cmd>XcodebuildTest<cr>", desc = "Run tests" },
+      -- <leader>xl (Toggle logs) lives in lua/config/keymaps.lua (loads after this).
+      { "<leader>xs", "<cmd>XcodebuildSelectScheme<cr>", desc = "Select scheme" },
+      { "<leader>xc", "<cmd>XcodebuildSelectDevice<cr>", desc = "Select device" },
+      -- debugging. Keys avoid LazyVim dap.core (<leader>dr/dt are taken). Once a
+      -- session starts, LazyVim's <leader>dc/db/di/do step controls apply.
+      { "<leader>dd", function() require("xcodebuild.integrations.dap").build_and_debug() end, desc = "Build & debug" },
+      { "<leader>dn", function() require("xcodebuild.integrations.dap").debug_without_build() end, desc = "Debug (no build)" },
+      { "<leader>dT", function() require("xcodebuild.integrations.dap").debug_tests() end, desc = "Debug tests" },
+      { "<leader>dx", function() require("xcodebuild.integrations.dap").terminate_session() end, desc = "Terminate xcode debug session" },
+    },
     config = function()
       require("xcodebuild").setup({})
-
-      -- Debugging. Xcode 16+ (we run 26.5) uses Apple's bundled lldb-dap
-      -- (/Applications/Xcode.app/.../usr/bin/lldb-dap) — no codelldb needed.
+      -- Xcode 16+ (we run 26.5) uses Apple's bundled lldb-dap — no codelldb.
       -- setup(true) = also load persisted breakpoints.
-      local dap = require("xcodebuild.integrations.dap")
-      dap.setup(true)
-
-      local map = vim.keymap.set
-      -- build / run / test
-      map("n", "<leader>X", "<cmd>XcodebuildPicker<cr>", { desc = "Xcodebuild actions" })
-      map("n", "<leader>xb", "<cmd>XcodebuildBuild<cr>", { desc = "Build project" })
-      map("n", "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", { desc = "Build & run" })
-      map("n", "<leader>xt", "<cmd>XcodebuildTest<cr>", { desc = "Run tests" })
-      map("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle logs" })
-      map("n", "<leader>xs", "<cmd>XcodebuildSelectScheme<cr>", { desc = "Select scheme" })
-      map("n", "<leader>xc", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select device" })
-      -- debugging (codelldb via xcodebuild integration).
-      -- Keys chosen to NOT collide with LazyVim dap.core (<leader>dr/dt are taken).
-      -- Once a session starts, LazyVim's <leader>dc/db/di/do step controls apply.
-      map("n", "<leader>dd", dap.build_and_debug, { desc = "Build & debug" })
-      map("n", "<leader>dn", dap.debug_without_build, { desc = "Debug (no build)" })
-      map("n", "<leader>dT", dap.debug_tests, { desc = "Debug tests" })
-      map("n", "<leader>dx", dap.terminate_session, { desc = "Terminate xcode debug session" })
+      require("xcodebuild.integrations.dap").setup(true)
     end,
   },
+
+  -- Note: <leader>xt is freed from LazyVim's Todo (Trouble) in
+  -- lua/plugins/todo-comments.lua so XcodebuildTest above can own it.
 
   -- 3. Swift syntax / treesitter.
   {
