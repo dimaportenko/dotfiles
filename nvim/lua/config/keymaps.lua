@@ -54,12 +54,29 @@ end, { desc = "Grep in repo" })
 map("t", "<A-z>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- map("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Copy relative path of current buffer to clipboard
+-- Copy current buffer paths to clipboard
 map("n", "<leader>yp", function()
-  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    vim.notify("No file path for current buffer", vim.log.levels.WARN)
+    return
+  end
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end, { desc = "Copy absolute path" })
+
+map("n", "<leader>yr", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    vim.notify("No file path for current buffer", vim.log.levels.WARN)
+    return
+  end
+  local rel = vim.fn.fnamemodify(path, ":.")
+  vim.fn.setreg("+", rel)
+  vim.notify("Copied: " .. rel, vim.log.levels.INFO)
 end, { desc = "Copy relative path" })
+
+map("n", "<leader>yb", "<cmd>CopyGitBranchName<cr>", { desc = "Copy git branch name" })
 
 --- jumpt to previous buffer
 map("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" })

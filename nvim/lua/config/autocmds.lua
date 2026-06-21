@@ -31,6 +31,28 @@ vim.api.nvim_create_user_command("CopyBufferPath", function()
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, {})
 
+vim.api.nvim_create_user_command("CopyGitBranchName", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  local start = path ~= "" and vim.fs.dirname(path) or vim.uv.cwd()
+  local git_dir = vim.fs.find(".git", { path = start, upward = true })[1]
+
+  if not git_dir then
+    vim.notify("Not in a git repository", vim.log.levels.WARN)
+    return
+  end
+
+  local root = vim.fs.dirname(git_dir)
+  local branch = vim.fn.systemlist({ "git", "-C", root, "branch", "--show-current" })[1]
+
+  if vim.v.shell_error ~= 0 or branch == nil or branch == "" then
+    vim.notify("No git branch name found", vim.log.levels.WARN)
+    return
+  end
+
+  vim.fn.setreg("+", branch)
+  vim.notify("Copied: " .. branch, vim.log.levels.INFO)
+end, {})
+
 vim.api.nvim_create_user_command("LspRestart", function(opts)
   local bufnr = opts.bang and nil or 0
   local clients = vim.lsp.get_clients({ bufnr = bufnr })
