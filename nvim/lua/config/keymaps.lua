@@ -50,6 +50,38 @@ map("n", "<leader>sG", function()
   require("telescope.builtin").live_grep({ cwd = LazyVim.root() })
 end, { desc = "Grep in repo" })
 
+local function focused_diagnostic_goto(next, severity)
+  return function()
+    local source_win = vim.api.nvim_get_current_win()
+
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      on_jump = function(_, bufnr)
+        local winid
+
+        if vim.api.nvim_win_is_valid(source_win) then
+          vim.api.nvim_win_call(source_win, function()
+            _, winid = vim.diagnostic.open_float({
+              bufnr = bufnr,
+              scope = "cursor",
+              focusable = true,
+              focus = false,
+            })
+          end)
+        end
+
+        if winid and vim.api.nvim_win_is_valid(winid) then
+          vim.api.nvim_set_current_win(winid)
+        end
+      end,
+    })
+  end
+end
+
+map("n", "]D", focused_diagnostic_goto(true), { desc = "Next Diagnostic (focus float)" })
+map("n", "[D", focused_diagnostic_goto(false), { desc = "Prev Diagnostic (focus float)" })
+
 -- Terminal mode escape
 map("t", "<A-z>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- map("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
