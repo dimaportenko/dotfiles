@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "markdown" },
   callback = function()
     vim.b.autoformat = false
+    vim.diagnostic.enable(false, { bufnr = 0 })
     vim.keymap.set("n", "<leader>m", "<cmd>MarkdownPreview<cr>", { buffer = true, desc = "Markdown Preview" })
   end,
 })
@@ -29,3 +30,21 @@ vim.api.nvim_create_user_command("CopyBufferPath", function()
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, {})
+
+vim.api.nvim_create_user_command("LspRestart", function(opts)
+  local bufnr = opts.bang and nil or 0
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  if #clients == 0 then
+    vim.notify("No active LSP clients", vim.log.levels.WARN)
+    return
+  end
+  local names = {}
+  for _, c in ipairs(clients) do
+    table.insert(names, c.name)
+    vim.lsp.stop_client(c.id)
+  end
+  vim.defer_fn(function()
+    vim.cmd.edit()
+    vim.notify("Restarted LSP: " .. table.concat(names, ", "), vim.log.levels.INFO)
+  end, 200)
+end, { bang = true, desc = "Restart LSP clients (use ! for all buffers)" })

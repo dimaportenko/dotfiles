@@ -24,10 +24,25 @@ return {
               end
             end
           end,
+          copy_absolute_path = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            vim.fn.setreg("+", path)
+            vim.notify("Copied: " .. path)
+          end,
+          copy_relative_path = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            local rel = vim.fn.fnamemodify(path, ":.")
+            vim.fn.setreg("+", rel)
+            vim.notify("Copied: " .. rel)
+          end,
         },
         window = {
           mappings = {
             ["oo"] = "opencode_add",
+            ["yp"] = "copy_absolute_path",
+            ["yr"] = "copy_relative_path",
           },
         },
       },
