@@ -117,3 +117,10 @@ map("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" })
 -- Set here (not in plugins/swift.lua) because this file loads on VeryLazy,
 -- after LazyVim's core keymaps — startup plugin maps would be clobbered.
 map("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle logs (Xcodebuild)" })
+
+-- Free LazyVim's <leader>l (Lazy) so multi-key maps like <leader>lr work.
+-- Lazy is rebound to <leader>L.
+map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
+vim.keymap.del("n", "<leader>l")
+
+map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "LspRestart" })
