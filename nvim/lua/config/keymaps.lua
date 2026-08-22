@@ -3,6 +3,10 @@
 
 local map = vim.keymap.set
 
+-- Swap LazyVim's default Zen and Zoom keymaps.
+Snacks.toggle.zoom():map("<leader>uz")
+Snacks.toggle.zen():map("<leader>uZ")
+
 -- Scope Telescope search to the nearest package root in monorepos so file and grep pickers stay focused.
 local function package_root()
   local file = vim.api.nvim_buf_get_name(0)
