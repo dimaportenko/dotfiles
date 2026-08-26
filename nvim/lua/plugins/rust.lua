@@ -8,7 +8,24 @@ return {
     opts = {
       server = {
         cmd = { "rustup", "run", "stable", "rust-analyzer" },
+        -- Stamps the target picked with `:RustTarget` into every client that
+        -- starts, wrapping rustaceanvim's own settings loader. See
+        -- `custom/rust_target.lua` for why the built-in
+        -- `:RustAnalyzer target` cannot be used here.
+        settings = function(project_root, default_settings)
+          return require("custom.rust_target").settings(project_root, default_settings)
+        end,
       },
+    },
+    -- rust-analyzer analyses one target at a time, so switching between macOS
+    -- and iOS decides which `#[cfg(...)]` branches are live. `:RustTarget`
+    -- completes over the installed targets, and opens a picker with no
+    -- argument.
+    init = function()
+      require("custom.rust_target").setup()
+    end,
+    keys = {
+      { "<leader>rt", "<cmd>RustTarget<cr>", desc = "Rust: switch rust-analyzer target" },
     },
   },
 
