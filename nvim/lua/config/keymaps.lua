@@ -112,6 +112,24 @@ map("n", "<leader>yr", function()
   vim.notify("Copied: " .. rel, vim.log.levels.INFO)
 end, { desc = "Copy relative path" })
 
+map("v", "<leader>yl", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    vim.notify("No file path for current buffer", vim.log.levels.WARN)
+    return
+  end
+  local rel = vim.fn.fnamemodify(path, ":.")
+  local first = vim.fn.line("v")
+  local last = vim.fn.line(".")
+  if first > last then
+    first, last = last, first
+  end
+  local ref = first == last and string.format("%s#L%d", rel, first)
+    or string.format("%s#L%d-L%d", rel, first, last)
+  vim.fn.setreg("+", ref)
+  vim.notify("Copied: " .. ref, vim.log.levels.INFO)
+end, { desc = "Copy relative path with line range" })
+
 map("n", "<leader>yb", "<cmd>CopyGitBranchName<cr>", { desc = "Copy git branch name" })
 
 --- jumpt to previous buffer
