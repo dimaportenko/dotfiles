@@ -51,7 +51,7 @@ map("n", "<leader>sg", function()
 end, { desc = "Grep in package" })
 
 map("n", "<leader>sG", function()
-  require("telescope.builtin").live_grep({ cwd = LazyVim.root() })
+  require("telescope").extensions.live_grep_args.live_grep_args({ cwd = LazyVim.root() })
 end, { desc = "Grep in repo" })
 
 local function focused_diagnostic_goto(next, severity)
