@@ -138,7 +138,9 @@ map("n", "<leader><Tab>", "<C-^>", { desc = "Jump to previous buffer" })
 -- Override LazyVim's <leader>xl (Location List) with Xcodebuild logs.
 -- Set here (not in plugins/swift.lua) because this file loads on VeryLazy,
 -- after LazyVim's core keymaps — startup plugin maps would be clobbered.
-map("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle logs (Xcodebuild)" })
+if vim.fn.has("mac") == 1 then
+  map("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle logs (Xcodebuild)" })
+end
 
 -- Free LazyVim's <leader>l (Lazy) so multi-key maps like <leader>lr work.
 -- Lazy is rebound to <leader>L.

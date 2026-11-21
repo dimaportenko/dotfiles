@@ -28,6 +28,8 @@ return {
   --    LazyVim's dap.core nvim-dap config — we only attach the Swift adapter.
   {
     "wojciech-kulik/xcodebuild.nvim",
+    -- xcodebuild / xcrun / simctl exist only on macOS.
+    cond = vim.fn.has("mac") == 1,
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
